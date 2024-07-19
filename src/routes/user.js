@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import UserController from '../controllers/user.controller.js';
+import protect from "../middleware/protect.js";
 
 router.get('/', protect, UserController.getAll)
 router.get('/:id', protect, UserController.getById)
