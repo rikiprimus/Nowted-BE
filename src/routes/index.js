@@ -4,7 +4,6 @@ import auth from './auth.js'
 import user from './user.js';
 import note from './note.js';
 import folder from './folder.js';
-import favorite from './favorite.js';
 
 //information
 router.get("/", (req, res) => {
@@ -14,7 +13,6 @@ router.get("/", (req, res) => {
 router.use("/auth", auth);
 router.use("/note", note);
 router.use("/folder", folder);
-router.use("/favorite", favorite);
 router.use("/user", user);
 
 export default router;
