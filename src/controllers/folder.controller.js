@@ -55,15 +55,15 @@ const FolderController = {
     const { user_id } = req.body
     let prefix = 'folder-'
     try {
-      const count = await Note.countDocuments({ name: { $regex: `^${prefix}`, $options: 'i' } });
-      const name = `${prefix}${count + 1}`;
-
-      const folders = await Note.countDocuments();
+      const folders = await Folder.countDocuments();
       if (folders >= 5) {
         return res
           .status(400)
           .json({ message: "Maksimum 5 folder sudah tercapai" });
       }
+      
+      const count = await Folder.countDocuments({ name: { $regex: `^${prefix}`, $options: 'i' } });
+      const name = `${prefix}${count + 1}`;
 
       if (user_id === "") {
         return res.status(401).json({ message: "Data User harus terisi" });
