@@ -131,7 +131,7 @@ const NoteController = {
     }
   },
   create: async (req, res, next) => {
-    const { user_id, archived, trash, folder_id, content, date, favorite } = req.body;
+    const { user_id } = req.body;
     let title;
     let titleNumber = 1;
     let titleExists = true;
