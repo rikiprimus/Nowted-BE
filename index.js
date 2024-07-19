@@ -11,16 +11,13 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 
-// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5173/home', 'https://nowted-app-six.vercel.app'];
-
 const corsOptions = {
-  origin: '*',
+  origin: true,
   credentials: true,
   optionSuccessStatus:200
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.json());
