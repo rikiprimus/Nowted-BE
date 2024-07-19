@@ -137,7 +137,7 @@ const NoteController = {
     let titleExists = true;
 
     try {
-      while (titleExists && titleNumber <= 500) {
+      while (titleExists && titleNumber <= 100) {
         title = `note-${titleNumber}`;
         const existingNote = await Note.findOne({ title });
 
