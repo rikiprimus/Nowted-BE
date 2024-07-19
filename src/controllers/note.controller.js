@@ -154,13 +154,7 @@ const NoteController = {
       }
       const newNote = new Note({
         title,
-        content,
-        date,
-        archived,
-        trash,
-        favorite,
         user_id,
-        folder_id,
       });
       const savedNote = await newNote.save();
       //checking save data
