@@ -52,27 +52,16 @@ const FolderController = {
     }
   },
   create: async (req, res, next) => {
-    let name;
-    let folderNumber = 1;
-    let folderExists = true;
     const { user_id } = req.body
-
+    let prefix = 'folder-'
     try {
-      const existingFoldersCount = await Folder.countDocuments();
-      if (existingFoldersCount >= 5) {
+      const count = await Note.countDocuments({ name: { $regex: `^${prefix}`, $options: 'i' } });
+      const name = `${prefix}${count + 1}`;
+      
+      if (count >= 5) {
         return res
           .status(400)
           .json({ message: "Maksimum 5 folder sudah tercapai" });
-      }
-      while (folderExists) {
-        name = `folder${folderNumber}`;
-        const existingFolder = await Folder.findOne({ name });
-
-        if (!existingFolder) {
-          folderExists = false;
-        } else {
-          folderNumber++;
-        }
       }
 
       if (user_id === "") {

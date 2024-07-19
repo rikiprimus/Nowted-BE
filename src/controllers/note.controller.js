@@ -133,11 +133,8 @@ const NoteController = {
   create: async (req, res, next) => {
     const { user_id } = req.body;
     let prefix = 'note-'
-
     try {
-
-      const notes = await Note.find({ title: { $regex: `^${prefix}`, $options: 'i' } });
-      const count = notes.length;
+      const count = await Note.countDocuments({ title: { $regex: `^${prefix}`, $options: 'i' } });
       const title = `${prefix}${count + 1}`;
       
       //checking input data
