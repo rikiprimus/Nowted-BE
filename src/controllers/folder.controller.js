@@ -57,8 +57,9 @@ const FolderController = {
     try {
       const count = await Note.countDocuments({ name: { $regex: `^${prefix}`, $options: 'i' } });
       const name = `${prefix}${count + 1}`;
-      
-      if (count >= 5) {
+
+      const folders = await Note.countDocuments();
+      if (folders >= 5) {
         return res
           .status(400)
           .json({ message: "Maksimum 5 folder sudah tercapai" });
