@@ -132,22 +132,14 @@ const NoteController = {
   },
   create: async (req, res, next) => {
     const { user_id } = req.body;
-    let title;
-    let titleNumber = 1;
-    let titleExists = true;
+    let prefix = 'note-'
 
     try {
-      while (titleExists && titleNumber <= 50) {
-        title = `note-${titleNumber}`;
-        const existingNote = await Note.findOne({ title });
 
-        if (!existingNote) {
-          titleExists = false;
-        } else {
-          titleNumber++;
-        }
-      }
-
+      const notes = await Note.find({ title: { $regex: `^${prefix}`, $options: 'i' } });
+      const count = notes.length;
+      const title = `${prefix}${count + 1}`;
+      
       //checking input data
       if (user_id === "") {
         return res.status(401).json({ message: "Data User harus terisi" });
