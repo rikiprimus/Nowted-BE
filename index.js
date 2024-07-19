@@ -11,7 +11,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://your-production-domain.com'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5173/home', 'https://nowted-app-six.vercel.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {
