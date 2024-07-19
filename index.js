@@ -1,5 +1,5 @@
 import express from 'express';
-// import cors from 'cors';
+import cors from 'cors';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import Router from './src/routes/index.js';
@@ -13,15 +13,13 @@ const app = express();
 
 // const allowedOrigins = ['http://localhost:5173', 'http://localhost:5173/home', 'https://nowted-app-six.vercel.app'];
 
-// const corsOptions = {
-//   origin: '*',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+};
 
-// app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.json());
