@@ -2,8 +2,9 @@ import express from "express";
 const router = express.Router();
 import NoteController from "../controllers/note.controller.js";
 import protect from "../middleware/protect.js";
+import cacheMiddleware from "../middleware/cache.js";
 
-router.get('/', NoteController.getAll)
+router.get('/', cacheMiddleware, NoteController.getAll)
 router.get('/:id/:user_id', protect, NoteController.getById)
 router.get('/user/:user_id', protect, NoteController.getByUser)
 router.get('/user/:user_id/:folder_id', protect, NoteController.getByUserAndFolder)

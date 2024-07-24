@@ -1,10 +1,13 @@
 import Note from "../models/note.model.js";
 import UserController from "./user.controller.js";
+import client from "../config/redis.js";
 
 const NoteController = {
   getAll: async (req, res) => {
+    const key = req.originalUrl;
     try {
       const note = await Note.find().sort({ createdAt: -1 });
+      await client.setEx(key, 3600, JSON.stringify(note));
       res.status(200).json({ message: "Data berhasil didapatkan", data: note });
     } catch (error) {
       console.error("Error fetching notes:", error);

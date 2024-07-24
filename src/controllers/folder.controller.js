@@ -37,7 +37,6 @@ const FolderController = {
 
     try {
       const folder = await Folder.find({ user_id: user_id });
-      console.log(folder)
       if (folder.length === 0) {
         res.status(401).json({ message: "Folder tidak ditemukan" });
       }
@@ -61,7 +60,7 @@ const FolderController = {
           .status(400)
           .json({ message: "Maksimum 5 folder sudah tercapai" });
       }
-      
+
       const count = await Folder.countDocuments({ name: { $regex: `^${prefix}`, $options: 'i' } });
       const name = `${prefix}${count + 1}`;
 
